@@ -53,7 +53,7 @@ Options:
 	a, b := discreteFourierCoeff(c, n)
 	nfold := n / 2
 	amp, phi := amplitudeAndPhase(a, b, nfold)
-	f := frequencies(nfold, wave.DT())
+	f, t := frequencies(nfold, wave.DT())
 
 	if *opt_csv_output {
 		fmt.Println("k,f,X,PHI")
@@ -110,10 +110,13 @@ func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float6
 	return amplitude, phase
 }
 
-func frequencies(nfold int, dt float64) []float64 {
+func frequencies(nfold int, dt float64) ([]float64, []float64) {
 	var f []float64
+	var t []float64
 	for k := 0; k <= nfold; k++ {
-		f = append(f, float64(k)/2.0/dt)
+		fk := float64(k) / 2.0 / dt
+		f = append(f, fk)
+		t = append(t, 1.0/fk)
 	}
-	return f
+	return f, t
 }
