@@ -45,6 +45,17 @@ Options:
 
 	wave := waves[0]
 	ndata := wave.NData()
+	x, n := makeData(wave.Data, ndata)
+
+	c := fft.FFT(x, n)
+
+	for i := 0; i < n; i++ {
+		fmt.Fprintf(os.Stdout, "%v\n", c[i])
+	}
+	fmt.Println(len(c))
+}
+
+func makeData(data []float64, ndata int) ([]complex128, int) {
 	var n int = 2
 	for {
 		if n >= ndata {
@@ -55,16 +66,10 @@ Options:
 	}
 	var x []complex128
 	for i := 0; i < ndata; i++ {
-		x = append(x, complex(wave.Data[i], 0.0))
+		x = append(x, complex(data[i], 0.0))
 	}
 	for i := ndata; i < n; i++ {
 		x = append(x, complex(0.0, 0.0))
 	}
-
-	c := fft.FFT(x, n)
-
-	for i := 0; i < n; i++ {
-		fmt.Fprintf(os.Stdout, "%v\n", c[i])
-	}
-	fmt.Println(len(c))
+	return x, n
 }
