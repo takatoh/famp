@@ -43,5 +43,8 @@ Options:
 	}
 
 	var wave *seismicwave.Wave = waves[0]
-	fmt.Fprintf(os.Stdout, "NAME:  %s\n", wave.Name)
+	fmt.Fprintf(os.Stdout, "NAME:   %s\n", wave.Name)
+	fmt.Fprintf(os.Stdout, "NDATA:  %d\n", wave.NData())
+	fmt.Fprintf(os.Stdout, "DT:     %f\n", wave.DT())
+	fmt.Fprintf(os.Stdout, "LENGTH: %f\n", wave.Length())
 }
