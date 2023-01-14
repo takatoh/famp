@@ -56,14 +56,14 @@ Options:
 	f, t := frequencies(nfold, wave.DT())
 
 	if *opt_csv_output {
-		fmt.Println("k,f,X,PHI")
+		fmt.Println("k,T,f,X,PHI")
 		for k := 0; k <= nfold; k++ {
-			fmt.Fprintf(os.Stdout, "%d,%.1f,%.3f,%.3f\n", k, f[k], amp[k], phi[k])
+			fmt.Fprintf(os.Stdout, "%d,%.3f,%.1f,%.3f,%.3f\n", k, t[k], f[k], amp[k], phi[k])
 		}
 	} else {
-		fmt.Println("    k        f       A       B       X     PHI")
+		fmt.Println("    k        T       f       A       B       X     PHI")
 		for k := 0; k <= nfold; k++ {
-			fmt.Fprintf(os.Stdout, "%5d %8.1f%8.3f%8.3f%8.3f%8.3f\n", k, f[k], a[k], b[k], amp[k], phi[k])
+			fmt.Fprintf(os.Stdout, "%5d %8.3f%8.1f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
 		}
 	}
 }
