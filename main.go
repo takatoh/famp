@@ -52,8 +52,8 @@ Options:
 	nfold := n / 2
 
 	fmt.Println("    k        A       B")
-	for i := 0; i <= nfold; i++ {
-		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f\n", i, a[i], b[i])
+	for k := 0; k <= nfold; k++ {
+		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f\n", k, a[k], b[k])
 	}
 	fmt.Println(len(c))
 }
@@ -68,10 +68,10 @@ func makeData(data []float64, ndata int) ([]complex128, int) {
 		}
 	}
 	var x []complex128
-	for i := 0; i < ndata; i++ {
-		x = append(x, complex(data[i], 0.0))
+	for k := 0; k < ndata; k++ {
+		x = append(x, complex(data[k], 0.0))
 	}
-	for i := ndata; i < n; i++ {
+	for k := ndata; k < n; k++ {
 		x = append(x, complex(0.0, 0.0))
 	}
 	return x, n
@@ -81,9 +81,9 @@ func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
 	var a []float64
 	var b []float64
 	nfold := n / 2
-	for i := 0; i <= nfold; i++ {
-		a = append(a, 2.0*real(c[i]))
-		b = append(b, -2.0*imag(c[i]))
+	for k := 0; k <= nfold; k++ {
+		a = append(a, 2.0*real(c[k]))
+		b = append(b, -2.0*imag(c[k]))
 	}
 	b[0] = 0.0
 	b[nfold] = 0.0
