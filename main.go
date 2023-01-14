@@ -52,10 +52,11 @@ Options:
 	a, b := discreteFourierCoeff(c, n)
 	nfold := n / 2
 	amp, phi := amplitudeAndPhase(a, b, nfold)
+	f := frequencies(nfold, wave.DT())
 
-	fmt.Println("    k        A       B       X     PHI")
+	fmt.Println("    k        f       A       B       X     PHI")
 	for k := 0; k <= nfold; k++ {
-		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f%8.3f%8.3f\n", k, a[k], b[k], amp[k], phi[k])
+		fmt.Fprintf(os.Stdout, "%5d %8.1f%8.3f%8.3f%8.3f%8.3f\n", k, f[k], a[k], b[k], amp[k], phi[k])
 	}
 }
 
