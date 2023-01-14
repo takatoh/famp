@@ -103,7 +103,8 @@ func amplitudeAndPhase(a []float64, b []float64, n int) ([]float64, []float64) {
 	var amplitude []float64
 	var phase []float64
 	for k := 0; k <= n; k++ {
-		amplitude = append(amplitude, math.Sqrt(math.Pow(a[k], 2.0)+math.Pow(b[k], 2.0)))
+		xk := math.Sqrt(math.Pow(a[k], 2.0) + math.Pow(b[k], 2.0))
+		amplitude = append(amplitude, xk)
 		phase = append(phase, math.Atan(-b[k]/a[k]))
 	}
 	return amplitude, phase
