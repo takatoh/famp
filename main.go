@@ -51,12 +51,12 @@ Options:
 	c := fft.FFT(x, n)
 	a, b := discreteFourierCoeff(c, n)
 	nfold := n / 2
+	amp, phi := amplitudeAndPhase(a, b, nfold)
 
-	fmt.Println("    k        A       B")
+	fmt.Println("    k        A       B       X     PHI")
 	for k := 0; k <= nfold; k++ {
-		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f\n", k, a[k], b[k])
+		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f%8.3f%8.3f\n", k, a[k], b[k], amp[k], phi[k])
 	}
-	fmt.Println(len(c))
 }
 
 func makeData(data []float64, ndata int) ([]complex128, int) {
