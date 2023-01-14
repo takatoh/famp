@@ -100,3 +100,11 @@ func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float6
 	}
 	return amplitude, phase
 }
+
+func frequencies(nfold int, dt float64) []float64 {
+	var f []float64
+	for k := 0; k <= nfold; k++ {
+		f = append(f, float64(k)/2.0/dt)
+	}
+	return f
+}
