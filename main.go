@@ -27,6 +27,7 @@ Options:
 		flag.PrintDefaults()
 	}
 	opt_version := flag.Bool("version", false, "Show version.")
+	opt_csv_output := flag.Bool("csv-output", false, "Output as CSV.")
 	flag.Parse()
 
 	if *opt_version {
@@ -54,9 +55,16 @@ Options:
 	amp, phi := amplitudeAndPhase(a, b, nfold)
 	f := frequencies(nfold, wave.DT())
 
-	fmt.Println("    k        f       A       B       X     PHI")
-	for k := 0; k <= nfold; k++ {
-		fmt.Fprintf(os.Stdout, "%5d %8.1f%8.3f%8.3f%8.3f%8.3f\n", k, f[k], a[k], b[k], amp[k], phi[k])
+	if *opt_csv_output {
+		fmt.Println("k,f,X,PHI")
+		for k := 0; k <= nfold; k++ {
+			fmt.Fprintf(os.Stdout, "%d,%.1f,%.3f,%.3f\n", k, f[k], amp[k], phi[k])
+		}
+	} else {
+		fmt.Println("    k        f       A       B       X     PHI")
+		for k := 0; k <= nfold; k++ {
+			fmt.Fprintf(os.Stdout, "%5d %8.1f%8.3f%8.3f%8.3f%8.3f\n", k, f[k], a[k], b[k], amp[k], phi[k])
+		}
 	}
 }
 
