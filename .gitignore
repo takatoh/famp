@@ -2,3 +2,6 @@
 *.csv
 *.dat
 *.txt
+*.xls
+*.xlsx
+*.xlsm
