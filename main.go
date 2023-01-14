@@ -50,19 +50,19 @@ Options:
 	x, n := makeData(wave.Data, ndata)
 
 	c := fft.FFT(x, n)
-	a, b := discreteFourierCoeff(c, n)
 	nfold := n / 2
+	a, b := discreteFourierCoeff(c, nfold)
 	amp, phi := amplitudeAndPhase(a, b, nfold)
-	f, t := frequencies(nfold, wave.DT())
+	f, t := frequencies(ndata, wave.DT())
 
 	if *opt_csv_output {
 		fmt.Println("k,T,f,X,PHI")
-		for k := 0; k <= nfold; k++ {
+		for k := 0; k <= ndata/2; k++ {
 			fmt.Fprintf(os.Stdout, "%d,%.3f,%.1f,%.3f,%.3f\n", k, t[k], f[k], amp[k], phi[k])
 		}
 	} else {
 		fmt.Println("    k        T       f       A       B       X     PHI")
-		for k := 0; k <= nfold; k++ {
+		for k := 0; k <= ndata/2; k++ {
 			fmt.Fprintf(os.Stdout, "%5d %8.3f%8.1f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
 		}
 	}
@@ -90,31 +90,32 @@ func makeData(data []float64, ndata int) ([]complex128, int) {
 func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
 	var a []float64
 	var b []float64
-	nfold := n / 2
-	for k := 0; k <= nfold; k++ {
+	for k := 0; k <= n; k++ {
 		a = append(a, 2.0*real(c[k]))
 		b = append(b, -2.0*imag(c[k]))
 	}
 	b[0] = 0.0
-	b[nfold] = 0.0
+	b[n] = 0.0
 	return a, b
 }
 
-func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float64) {
+func amplitudeAndPhase(a []float64, b []float64, n int) ([]float64, []float64) {
 	var amplitude []float64
 	var phase []float64
-	for k := 0; k <= nfold; k++ {
+	for k := 0; k <= n; k++ {
 		amplitude = append(amplitude, math.Sqrt(math.Pow(a[k], 2.0)+math.Pow(b[k], 2.0)))
 		phase = append(phase, math.Atan(-b[k]/a[k]))
 	}
 	return amplitude, phase
 }
 
-func frequencies(nfold int, dt float64) ([]float64, []float64) {
+func frequencies(n int, dt float64) ([]float64, []float64) {
 	var f []float64
 	var t []float64
-	for k := 0; k <= nfold; k++ {
-		fk := float64(k) / 2.0 / dt
+	f = append(f, 0.0)
+	t = append(t, 0.0)
+	for k := 1; k <= n/2; k++ {
+		fk := float64(k) / float64(n) / dt
 		f = append(f, fk)
 		t = append(t, 1.0/fk)
 	}
