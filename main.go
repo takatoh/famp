@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/takatoh/fft"
 	"github.com/takatoh/seismicwave"
 )
 
@@ -42,9 +43,28 @@ Options:
 		os.Exit(1)
 	}
 
-	var wave *seismicwave.Wave = waves[0]
-	fmt.Fprintf(os.Stdout, "NAME:   %s\n", wave.Name)
-	fmt.Fprintf(os.Stdout, "NDATA:  %d\n", wave.NData())
-	fmt.Fprintf(os.Stdout, "DT:     %f\n", wave.DT())
-	fmt.Fprintf(os.Stdout, "LENGTH: %f\n", wave.Length())
+	wave := waves[0]
+	ndata := wave.NData()
+	var n int = 2
+	for {
+		if n >= ndata {
+			break
+		} else {
+			n *= 2
+		}
+	}
+	var x []complex128
+	for i := 0; i < ndata; i++ {
+		x = append(x, complex(wave.Data[i], 0.0))
+	}
+	for i := ndata; i < n; i++ {
+		x = append(x, complex(0.0, 0.0))
+	}
+
+	c := fft.FFT(x, n)
+
+	for i := 0; i < n; i++ {
+		fmt.Fprintf(os.Stdout, "%v\n", c[i])
+	}
+	fmt.Println(len(c))
 }
