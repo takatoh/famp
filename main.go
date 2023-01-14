@@ -73,3 +73,14 @@ func makeData(data []float64, ndata int) ([]complex128, int) {
 	}
 	return x, n
 }
+
+func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
+	var a []float64
+	var b []float64
+	nfold := n / 2
+	for i := 0; i <= nfold; i++ {
+		a = append(a, 2.0*real(c[i]))
+		b = append(b, -2.0*imag(c[i]))
+	}
+	return a, b
+}
