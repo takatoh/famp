@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 
@@ -88,4 +89,14 @@ func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
 	b[0] = 0.0
 	b[nfold] = 0.0
 	return a, b
+}
+
+func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float64) {
+	var amplitude []float64
+	var phase []float64
+	for k := 0; k <= nfold; k++ {
+		amplitude = append(amplitude, math.Sqrt(math.Pow(a[k], 2.0)+math.Pow(b[k], 2.0)))
+		phase = append(phase, math.Atan(-b[k]/a[k]))
+	}
+	return amplitude, phase
 }
