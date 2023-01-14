@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/takatoh/seismicwave"
 )
 
 const (
@@ -32,5 +34,14 @@ Options:
 
 	filename := flag.Arg(0)
 
-	fmt.Print(filename)
+	var waves []*seismicwave.Wave
+	var err error
+	waves, err = seismicwave.LoadCSV(filename)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %s\n", err)
+		os.Exit(1)
+	}
+
+	var wave *seismicwave.Wave = waves[0]
+	fmt.Fprintf(os.Stdout, "NAME:  %s\n", wave.Name)
 }
