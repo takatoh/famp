@@ -85,5 +85,7 @@ func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
 		a = append(a, 2.0*real(c[i]))
 		b = append(b, -2.0*imag(c[i]))
 	}
+	b[0] = 0.0
+	b[nfold] = 0.0
 	return a, b
 }
