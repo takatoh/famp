@@ -48,9 +48,12 @@ Options:
 	x, n := makeData(wave.Data, ndata)
 
 	c := fft.FFT(x, n)
+	a, b := discreteFourierCoeff(c, n)
+	nfold := n / 2
 
-	for i := 0; i < n; i++ {
-		fmt.Fprintf(os.Stdout, "%v\n", c[i])
+	fmt.Println("    k        A       B")
+	for i := 0; i <= nfold; i++ {
+		fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f\n", i, a[i], b[i])
 	}
 	fmt.Println(len(c))
 }
