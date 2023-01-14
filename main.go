@@ -47,13 +47,19 @@ Options:
 
 	wave := waves[0]
 	ndata := wave.NData()
+	dt := wave.DT()
+	t2 := wave.Length() / 2.0
 	x, n := makeData(wave.Data, ndata)
 
 	c := fft.FFT(x, n)
 	nfold := n / 2
 	a, b := discreteFourierCoeff(c, nfold)
-	amp, phi := amplitudeAndPhase(a, b, nfold)
-	f, t := frequencies(ndata, wave.DT())
+	xx, phi := amplitudeAndPhase(a, b, nfold)
+	var amp []float64
+	for k := 0; k <= nfold; k++ {
+		amp = append(amp, xx[k]*t2)
+	}
+	f, t := frequencies(ndata, dt)
 
 	if *opt_csv_output {
 		fmt.Println("k,T,f,X,PHI")
