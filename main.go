@@ -68,6 +68,7 @@ Options:
 		}
 	} else {
 		fmt.Println("    k        T       f       A       B       X     PHI")
+		fmt.Println("")
 		for k := 0; k <= ndata/2; k++ {
 			fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
 		}
