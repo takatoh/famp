@@ -1,4 +1,4 @@
-module github.com/takatoh/wap
+module github.com/takatoh/famp
 
 go 1.19
 
