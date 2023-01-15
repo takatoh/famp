@@ -64,12 +64,12 @@ Options:
 	if *opt_csv_output {
 		fmt.Println("k,T,f,X,PHI")
 		for k := 0; k <= ndata/2; k++ {
-			fmt.Fprintf(os.Stdout, "%d,%f,%f,%f,%f\n", k, t[k], f[k], amp[k], phi[k])
+			fmt.Printf("%d,%f,%f,%f,%f\n", k, t[k], f[k], amp[k], phi[k])
 		}
 	} else {
 		fmt.Println("    k        T       f       A       B       X     PHI")
 		for k := 0; k <= ndata/2; k++ {
-			fmt.Fprintf(os.Stdout, "%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
+			fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
 		}
 	}
 }
