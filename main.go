@@ -139,3 +139,11 @@ func printResult(t, f, a, b, x, phi []float64) {
 		fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], x[k], phi[k])
 	}
 }
+
+func printResultAsCSV(t, f, x, phi []float64) {
+	n := len(t)
+	fmt.Println("k,T,f,X,PHI")
+	for k := 0; k <= n/2; k++ {
+		fmt.Printf("%d,%f,%f,%f,%f\n", k, t[k], f[k], x[k], phi[k])
+	}
+}
