@@ -116,8 +116,9 @@ func frequencies(n int, dt float64) ([]float64, []float64) {
 	var t []float64
 	f = append(f, 0.0)
 	t = append(t, 0.0)
+	ndt := float64(n) * dt
 	for k := 1; k <= n/2; k++ {
-		fk := float64(k) / float64(n) / dt
+		fk := float64(k) / ndt
 		f = append(f, fk)
 		t = append(t, 1.0/fk)
 	}
