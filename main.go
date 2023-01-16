@@ -62,16 +62,9 @@ Options:
 	f, t := frequencies(ndata, dt)
 
 	if *opt_csv_output {
-		fmt.Println("k,T,f,X,PHI")
-		for k := 0; k <= ndata/2; k++ {
-			fmt.Printf("%d,%f,%f,%f,%f\n", k, t[k], f[k], amp[k], phi[k])
-		}
+		printResultAsCSV(t, f, amp, phi)
 	} else {
-		fmt.Println("    k        T       f       A       B       X     PHI")
-		fmt.Println("")
-		for k := 0; k <= ndata/2; k++ {
-			fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], amp[k], phi[k])
-		}
+		printResult(t, f, a, b, amp, phi)
 	}
 }
 
