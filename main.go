@@ -130,3 +130,12 @@ func frequencies(n int, dt float64) ([]float64, []float64) {
 	}
 	return f, t
 }
+
+func printResult(t, f, a, b, x, phi []float64) {
+	n := len(t)
+	fmt.Println("    k        T       f       A       B       X     PHI")
+	fmt.Println("")
+	for k := 0; k <= n/2; k++ {
+		fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], x[k], phi[k])
+	}
+}
