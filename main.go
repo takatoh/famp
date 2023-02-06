@@ -126,7 +126,7 @@ func frequencies(n int, dt float64) ([]float64, []float64) {
 }
 
 func printResult(t, f, a, b, x, phi []float64) {
-	fmt.Println("    k        T       f       A       B       X     PHI")
+	fmt.Println("    k        T       f       A       B    AMP.   PHASE")
 	fmt.Println("")
 	for k := 0; k < len(t); k++ {
 		fmt.Printf("%5d %8.3f%8.3f%8.3f%8.3f%8.3f%8.3f\n", k, t[k], f[k], a[k], b[k], x[k], phi[k])
