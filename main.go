@@ -50,7 +50,7 @@ Options:
 	ndata := wave.NData()
 	dt := wave.DT()
 	t2 := wave.Length() / 2.0
-	x, n := makeData(wave.Data)
+	x, n := makeData(wave.Data, ndata)
 
 	c := fft.FFT(x, n)
 	nfold := n / 2
@@ -68,8 +68,7 @@ Options:
 	}
 }
 
-func makeData(data []float64) ([]complex128, int) {
-	var ndata int = len(data)
+func makeData(data []float64, ndata int) ([]complex128, int) {
 	var n int = 2
 	for {
 		if n >= ndata {
