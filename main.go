@@ -57,7 +57,7 @@ Options:
 	a, b := discreteFourierCoeff(c, nfold)
 	amplitude, phase := amplitudeAndPhase(a, b, nfold)
 	for k := 0; k <= nfold; k++ {
-		amplitude[k] = amplitude[k] * t2
+		amplitude[k] *= t2
 	}
 	f, t := frequencies(ndata, dt)
 
