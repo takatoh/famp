@@ -55,17 +55,16 @@ Options:
 	c := fft.FFT(x, n)
 	nfold := n / 2
 	a, b := discreteFourierCoeff(c, nfold)
-	xx, phi := amplitudeAndPhase(a, b, nfold)
-	var amp []float64
+	amplitude, phase := amplitudeAndPhase(a, b, nfold)
 	for k := 0; k <= nfold; k++ {
-		amp = append(amp, xx[k]*t2)
+		amplitude[k] = amplitude[k] * t2
 	}
 	f, t := frequencies(ndata, dt)
 
 	if *opt_csv_output {
-		printResultAsCSV(t, f, amp, phi)
+		printResultAsCSV(t, f, amplitude, phase)
 	} else {
-		printResult(t, f, a, b, amp, phi)
+		printResult(t, f, a, b, amplitude, phase)
 	}
 }
 
