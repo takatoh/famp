@@ -18,7 +18,7 @@ const (
 func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr,
-			`%s - Amplitude and Phase angle of seismic wave.
+			`%s - Fourier AMplitude and Phase angle of seismic wave.
 
 Usage:
   %s <wavefile.csv>
