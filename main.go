@@ -21,7 +21,7 @@ func main() {
 			`%s - Fourier AMplitude and Phase angle of seismic wave.
 
 Usage:
-  %s <wavefile.csv>
+  %s [options] <wavefile.csv>
 
 Options:
 `, progName, progName)
