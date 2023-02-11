@@ -134,7 +134,7 @@ func printResult(t, f, a, b, x, phi []float64) {
 }
 
 func printResultAsCSV(t, f, x, phi []float64) {
-	fmt.Println("k,T,f,X,PHI")
+	fmt.Println("k,T,f,AMP.,PHASE")
 	for k := 0; k < len(t); k++ {
 		fmt.Printf("%d,%f,%f,%f,%f\n", k, t[k], f[k], x[k], phi[k])
 	}
