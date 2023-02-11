@@ -89,22 +89,22 @@ func makeData(data []float64) ([]complex128, int) {
 	return x, n
 }
 
-func discreteFourierCoeff(c []complex128, n int) ([]float64, []float64) {
+func discreteFourierCoeff(c []complex128, nfold int) ([]float64, []float64) {
 	var a []float64
 	var b []float64
-	for k := 0; k <= n; k++ {
+	for k := 0; k <= nfold; k++ {
 		a = append(a, 2.0*real(c[k]))
 		b = append(b, -2.0*imag(c[k]))
 	}
 	b[0] = 0.0
-	b[n] = 0.0
+	b[nfold] = 0.0
 	return a, b
 }
 
-func amplitudeAndPhase(a []float64, b []float64, n int) ([]float64, []float64) {
+func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float64) {
 	var amplitude []float64
 	var phase []float64
-	for k := 0; k <= n; k++ {
+	for k := 0; k <= nfold; k++ {
 		xk := math.Sqrt(a[k]*a[k] + b[k]*b[k])
 		amplitude = append(amplitude, xk)
 		phase = append(phase, math.Atan2(-b[k], a[k]))
