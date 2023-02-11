@@ -5,25 +5,26 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"path/filepath"
 
 	"github.com/takatoh/fft"
 	"github.com/takatoh/seismicwave"
 )
 
 const (
+	progName    = "famp"
 	progVersion = "v0.4.0"
 )
 
 func main() {
-	progName := filepath.Base(os.Args[0])
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr,
-			`Usage:
+			`%s - Amplitude and Phase angle of seismic wave.
+
+Usage:
   %s <wavefile.csv>
 
 Options:
-`, progName)
+`, progName, progName)
 		flag.PrintDefaults()
 	}
 	opt_version := flag.Bool("version", false, "Show version.")
