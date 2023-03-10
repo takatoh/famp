@@ -59,7 +59,7 @@ Options:
 	for k := 0; k <= nfold; k++ {
 		amplitude[k] *= t2
 	}
-	f, t := frequencies(ndata, dt)
+	f, t := frequencies(n, dt)
 
 	if *opt_csv_output {
 		printResultAsCSV(t, f, amplitude, phase)
