@@ -12,7 +12,7 @@ import (
 
 const (
 	progName    = "famp"
-	progVersion = "v0.5.2"
+	progVersion = "v0.5.3"
 )
 
 func main() {
