@@ -61,7 +61,7 @@ Options:
 	f, t := frequencies(n, dt)
 
 	if *opt_csv_output {
-		printResultAsCSV(t, f, amplitude, phase)
+		printResultAsCSV(t, f, a, b, amplitude, phase)
 	} else {
 		printResult(t, f, a, b, amplitude, phase)
 	}
@@ -132,9 +132,9 @@ func printResult(t, f, a, b, amp, phase []float64) {
 	}
 }
 
-func printResultAsCSV(t, f, amp, phase []float64) {
+func printResultAsCSV(t, f, a, b, amp, phase []float64) {
 	fmt.Println("k,T,f,AMP.,PHASE")
 	for k := 0; k < len(t); k++ {
-		fmt.Printf("%d,%f,%f,%f,%f\n", k, t[k], f[k], amp[k], phase[k])
+		fmt.Printf("%d,%f,%f,%f,%f,%f,%f\n", k, t[k], f[k], a[k], b[k], amp[k], phase[k])
 	}
 }
