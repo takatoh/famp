@@ -77,22 +77,22 @@ func makeData(data []float64) ([]complex128, int) {
 			n *= 2
 		}
 	}
-	var x []complex128
+	x := make([]complex128, n)
 	for k := 0; k < ndata; k++ {
-		x = append(x, complex(data[k], 0.0))
+		x[k] = complex(data[k], 0.0)
 	}
 	for k := ndata; k < n; k++ {
-		x = append(x, complex(0.0, 0.0))
+		x[k] = complex(0.0, 0.0)
 	}
 	return x, n
 }
 
 func discreteFourierCoeff(c []complex128, nfold int) ([]float64, []float64) {
-	var a []float64
-	var b []float64
+	a := make([]float64, nfold+1)
+	b := make([]float64, nfold+1)
 	for k := 0; k <= nfold; k++ {
-		a = append(a, 2.0*real(c[k]))
-		b = append(b, -2.0*imag(c[k]))
+		a[k] = 2.0 * real(c[k])
+		b[k] = -2.0 * imag(c[k])
 	}
 	b[0] = 0.0
 	b[nfold] = 0.0
@@ -100,26 +100,27 @@ func discreteFourierCoeff(c []complex128, nfold int) ([]float64, []float64) {
 }
 
 func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float64) {
-	var amplitude []float64
-	var phase []float64
+	amplitude := make([]float64, nfold+1)
+	phase := make([]float64, nfold+1)
 	for k := 0; k <= nfold; k++ {
 		xk := math.Sqrt(a[k]*a[k] + b[k]*b[k])
-		amplitude = append(amplitude, xk)
-		phase = append(phase, math.Atan2(-b[k], a[k]))
+		amplitude[k] = xk
+		phase[k] = math.Atan2(-b[k], a[k])
 	}
 	return amplitude, phase
 }
 
 func frequencies(n int, dt float64) ([]float64, []float64) {
-	var f []float64
-	var t []float64
-	f = append(f, 0.0)
-	t = append(t, 0.0)
+	nfold := n / 2
+	f := make([]float64, nfold+1)
+	t := make([]float64, nfold+1)
+	f[0] = 0.0
+	t[0] = 0.0
 	ndt := float64(n) * dt
 	for k := 1; k <= n/2; k++ {
 		fk := float64(k) / ndt
-		f = append(f, fk)
-		t = append(t, 1.0/fk)
+		f[k] = fk
+		t[k] = 1.0 / fk
 	}
 	return f, t
 }
