@@ -103,8 +103,7 @@ func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float6
 	amplitude := make([]float64, nfold+1)
 	phase := make([]float64, nfold+1)
 	for k := 0; k <= nfold; k++ {
-		xk := math.Sqrt(a[k]*a[k] + b[k]*b[k])
-		amplitude[k] = xk
+		amplitude[k] = math.Sqrt(a[k]*a[k] + b[k]*b[k])
 		phase[k] = math.Atan2(-b[k], a[k])
 	}
 	return amplitude, phase
