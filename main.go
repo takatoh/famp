@@ -69,13 +69,9 @@ Options:
 
 func makeData(data []float64) ([]complex128, int) {
 	ndata := len(data)
-	var n int = 2
-	for {
-		if n >= ndata {
-			break
-		} else {
-			n *= 2
-		}
+	n := 2
+	for n < ndata {
+		n *= 2
 	}
 	x := make([]complex128, n)
 	for k := 0; k < ndata; k++ {
