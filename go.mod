@@ -3,7 +3,7 @@ module github.com/takatoh/famp
 go 1.20
 
 require (
-	github.com/takatoh/fft v1.2.0
+	github.com/takatoh/fft v1.3.0
 	github.com/takatoh/seismicwave v1.2.0
 )
 
