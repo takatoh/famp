@@ -49,7 +49,7 @@ Options:
 	wave := waves[0]
 	dt := wave.DT()
 	t2 := wave.Length() / 2.0
-	x, n := makeData(wave.Data)
+	x, n := fft.MakeComplexData(wave.Data)
 
 	c := fft.FFT(x, n)
 	nfold := n / 2
@@ -65,22 +65,6 @@ Options:
 	} else {
 		printResult(t, f, a, b, amplitude, phase)
 	}
-}
-
-func makeData(data []float64) ([]complex128, int) {
-	ndata := len(data)
-	n := 2
-	for n < ndata {
-		n *= 2
-	}
-	x := make([]complex128, n)
-	for k := 0; k < ndata; k++ {
-		x[k] = complex(data[k], 0.0)
-	}
-	for k := ndata; k < n; k++ {
-		x[k] = complex(0.0, 0.0)
-	}
-	return x, n
 }
 
 func discreteFourierCoeff(c []complex128, nfold int) ([]float64, []float64) {
