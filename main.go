@@ -90,16 +90,12 @@ func amplitudeAndPhase(a []float64, b []float64, nfold int) ([]float64, []float6
 }
 
 func frequencies(n int, dt float64) ([]float64, []float64) {
-	nfold := n / 2
-	f := make([]float64, nfold+1)
-	t := make([]float64, nfold+1)
-	f[0] = 0.0
+	f := fft.RFFTFreq(n, dt)
+	nfold := len(f)
+	t := make([]float64, nfold)
 	t[0] = 0.0
-	ndt := float64(n) * dt
-	for k := 1; k <= n/2; k++ {
-		fk := float64(k) / ndt
-		f[k] = fk
-		t[k] = 1.0 / fk
+	for k := 1; k < nfold; k++ {
+		t[k] = 1.0 / f[k]
 	}
 	return f, t
 }
