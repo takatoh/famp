@@ -62,7 +62,11 @@ Options:
 	f, t := frequencies(n, dt)
 
 	if *opt_phase {
-		printPhaseSpectrum(f, phase)
+		if *opt_csv_output {
+			printPhaseSpectrumAsCSV(f, phase)
+		} else {
+			printPhaseSpectrum(f, phase)
+		}
 	} else if *opt_csv_output {
 		printResultAsCSV(t, f, a, b, amplitude, phase)
 	} else {
@@ -123,5 +127,12 @@ func printPhaseSpectrum(f, phase []float64) {
 	fmt.Println("")
 	for k := 0; k < len(f); k++ {
 		fmt.Printf("%8.3f%8.3f\n", 2*math.Pi*f[k], phase[k])
+	}
+}
+
+func printPhaseSpectrumAsCSV(f, phase []float64) {
+	fmt.Println("OMEGA,PHASE")
+	for k := 0; k < len(f); k++ {
+		fmt.Printf("%f,%f\n", 2*math.Pi*f[k], phase[k])
 	}
 }
