@@ -29,6 +29,7 @@ Options:
 	}
 	opt_version := flag.Bool("version", false, "Show version.")
 	opt_csv_output := flag.Bool("csv-output", false, "Output as CSV.")
+	opt_phase := flag.Bool("phase", false, "Output phase angle spectrum.")
 	flag.Parse()
 
 	if *opt_version {
@@ -60,7 +61,9 @@ Options:
 	}
 	f, t := frequencies(n, dt)
 
-	if *opt_csv_output {
+	if *opt_phase {
+		printPhaseSpectrum(f, phase)
+	} else if *opt_csv_output {
 		printResultAsCSV(t, f, a, b, amplitude, phase)
 	} else {
 		printResult(t, f, a, b, amplitude, phase)
@@ -112,5 +115,13 @@ func printResultAsCSV(t, f, a, b, amp, phase []float64) {
 	fmt.Println("k,T,f,A,B,AMP.,PHASE")
 	for k := 0; k < len(t); k++ {
 		fmt.Printf("%d,%f,%f,%f,%f,%f,%f\n", k, t[k], f[k], a[k], b[k], amp[k], phase[k])
+	}
+}
+
+func printPhaseSpectrum(f, phase []float64) {
+	fmt.Println("   OMEGA   PHASE")
+	fmt.Println("")
+	for k := 0; k < len(f); k++ {
+		fmt.Printf("%8.3f%8.3f\n", 2*math.Pi*f[k], phase[k])
 	}
 }
