@@ -123,16 +123,16 @@ func printResultAsCSV(t, f, a, b, amp, phase []float64) {
 }
 
 func printPhaseSpectrum(f, phase []float64) {
-	fmt.Println("   OMEGA   PHASE")
+	fmt.Println("   FREQ.   PHASE")
 	fmt.Println("")
 	for k := 0; k < len(f); k++ {
-		fmt.Printf("%8.3f%8.3f\n", 2*math.Pi*f[k], phase[k])
+		fmt.Printf("%8.3f%8.3f\n", f[k], phase[k])
 	}
 }
 
 func printPhaseSpectrumAsCSV(f, phase []float64) {
 	fmt.Println("OMEGA,PHASE")
 	for k := 0; k < len(f); k++ {
-		fmt.Printf("%f,%f\n", 2*math.Pi*f[k], phase[k])
+		fmt.Printf("%f,%f\n", f[k], phase[k])
 	}
 }
