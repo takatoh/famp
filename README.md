@@ -37,7 +37,7 @@ $ ./famp example.csv
 `-csv-output` オプションを与えると、CSV 形式で出力します。
 
 ```
-$ ./famp -csv-output ElCentro.csv
+$ ./famp -csv-output example.csv
 k,T,f,A,B,AMP.,PHASE
 0,0.000000,0.000000,0.064014,0.000000,1.720688,-0.000000
 1,81.920000,0.012207,0.146940,0.043723,4.120891,-0.289214
@@ -57,7 +57,7 @@ k,T,f,A,B,AMP.,PHASE
 
 
 ```
-$ ./famp -phase ElCentro.csv
+$ ./famp -phase example.csv
    FREQ.   PHASE
 
    0.000  -0.000
