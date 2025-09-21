@@ -4,18 +4,22 @@
 
 ## Installation
 
-​    $ go install github.com/takatoh/famp
+```
+​> go install github.com/takatoh/famp
+```
 
 ## Usage
 
 基本的な使い方は、`fmap`コマンドに時刻歴波形をCSV形式のファイルで与えるだけです。
 
-​    $ famp example.csv
+```
+> famp example.csv
+```
 
 次数 `k` 、周期 `T` 、周波数 `f` 、２つの有限フーリエ係数 `A`  と `B` 、振幅 `AMP.` 、位相角 `PHASE` を出力します。
 
 ```
-$ ./famp example.csv
+> ./famp example.csv
     k        T       f       A       B    AMP.   PHASE
 
     0    0.000   0.000   0.064   0.000   1.721  -0.000
@@ -37,7 +41,7 @@ $ ./famp example.csv
 `-csv-output` オプションを与えると、CSV 形式で出力します。
 
 ```
-$ ./famp -csv-output example.csv
+> ./famp -csv-output example.csv
 k,T,f,A,B,AMP.,PHASE
 0,0.000000,0.000000,0.064014,0.000000,1.720688,-0.000000
 1,81.920000,0.012207,0.146940,0.043723,4.120891,-0.289214
@@ -57,7 +61,7 @@ k,T,f,A,B,AMP.,PHASE
 
 
 ```
-$ ./famp -phase example.csv
+> ./famp -phase example.csv
    FREQ.   PHASE
 
    0.000  -0.000
